@@ -10,16 +10,11 @@ private:
     Contact _contacts[8];
     int _num_of_contacts;
 public:
-    PhoneBook(Contact, int);
+    PhoneBook(void);
     ~PhoneBook();
+
+    void    add(Contact);
+    void    search(int);
+    void    exit(void);
 };
-
-PhoneBook::PhoneBook(Contact contact, int num_of_contacts)
-{
-}
-
-PhoneBook::~PhoneBook()
-{
-}
-
 #endif
