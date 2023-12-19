@@ -13,8 +13,8 @@ public:
     PhoneBook(void);
     ~PhoneBook();
 
-    void    add(Contact);
-    void    search(int);
+    void    add(void);
+    void    search(void);
     void    exit(void);
 };
 #endif
