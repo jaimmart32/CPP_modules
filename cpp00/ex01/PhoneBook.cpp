@@ -45,26 +45,41 @@ void    PhoneBook::add()
     std::string phone_num;
     std::string d_secret;
 
-    std::cout << "Enter first name: ";
-    std::getline(std::cin, f_name);
-    if(std::cin.eof())
-        ::exit (1);
-    std::cout << "Enter last name: ";
-    std::getline(std::cin, l_name);
-    if(std::cin.eof())
-        ::exit (1);
-    std::cout << "Enter nick name: ";
-    std::getline(std::cin, n_name);
-    if(std::cin.eof())
-        ::exit (1);
-    std::cout << "Enter phone number: ";
-    std::getline(std::cin, phone_num);
-    if(std::cin.eof())
-        ::exit (1);
-    std::cout << "Enter the darkest secret: ";
-    std::getline(std::cin, d_secret);
-    if(std::cin.eof())
-        ::exit (1);
+    while (f_name.empty())
+    {
+        std::cout << "Enter first name: ";
+        std::getline(std::cin, f_name);
+        if(std::cin.eof())
+            ::exit (1);
+    }
+    while (l_name.empty())
+    {
+        std::cout << "Enter last name: ";
+        std::getline(std::cin, l_name);
+        if(std::cin.eof())
+            ::exit (1);
+    }
+    while (n_name.empty())
+    {
+        std::cout << "Enter nick name: ";
+        std::getline(std::cin, n_name);
+        if(std::cin.eof())
+            ::exit (1);
+    }
+    while (phone_num.empty())
+    {
+        std::cout << "Enter phone number: ";
+        std::getline(std::cin, phone_num);
+        if(std::cin.eof())
+            ::exit (1);
+    }
+    while (d_secret.empty())
+    {
+        std::cout << "Enter the darkest secret: ";
+        std::getline(std::cin, d_secret);
+        if(std::cin.eof())
+            ::exit (1);
+    }
 
     Contact newContact = Contact(f_name, l_name, n_name, phone_num, d_secret);
     if (_num_of_contacts < 8)

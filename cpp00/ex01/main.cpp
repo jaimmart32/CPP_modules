@@ -5,7 +5,7 @@ int main()
 {
     PhoneBook   new_phonebook;
     std::string option;
-
+//    std::cout << new_phonebook._num_of_contacts;
     while(true)
     {
         std::cout << "*******PHONEBOOK MENU**************************" << std::endl;
