@@ -2,7 +2,6 @@
 
 Contact::Contact()
 {
-    std::cout << "Constructor por defecto" << std::endl;
 }
 
 Contact::Contact(std::string first_name, std::string last_name,
@@ -13,7 +12,6 @@ Contact::Contact(std::string first_name, std::string last_name,
      _phone_number(phone_number),
      _dark_secret(dark_secret)
 {
-    std::cout << "Constructor especifico." << std::endl;
 }
 
 Contact::~Contact()

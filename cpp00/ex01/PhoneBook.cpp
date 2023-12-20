@@ -46,20 +46,25 @@ void    PhoneBook::add()
     std::string d_secret;
 
     std::cout << "Enter first name: ";
-    std::cin >> f_name;
-    std::cin.clear();
+    std::getline(std::cin, f_name);
+    if(std::cin.eof())
+        ::exit (1);
     std::cout << "Enter last name: ";
-    std::cin >> l_name;
-    std::cin.clear();
+    std::getline(std::cin, l_name);
+    if(std::cin.eof())
+        ::exit (1);
     std::cout << "Enter nick name: ";
-    std::cin >> n_name;
-    std::cin.clear();
+    std::getline(std::cin, n_name);
+    if(std::cin.eof())
+        ::exit (1);
     std::cout << "Enter phone number: ";
-    std::cin >> phone_num;
-    std::cin.clear();
+    std::getline(std::cin, phone_num);
+    if(std::cin.eof())
+        ::exit (1);
     std::cout << "Enter the darkest secret: ";
-    std::cin >> d_secret;
-    std::cin.clear();
+    std::getline(std::cin, d_secret);
+    if(std::cin.eof())
+        ::exit (1);
 
     Contact newContact = Contact(f_name, l_name, n_name, phone_num, d_secret);
     if (_num_of_contacts < 8)
@@ -81,8 +86,14 @@ void    PhoneBook::search()
     display_contacts(this->_contacts, display_size);
 
     int index;
+
     std::cout << "Type the index of the contact to display: ";
     std::cin >> index;
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    if(std::cin.eof())
+        ::exit (1);
     if (index && index > 0 && index <= 8)
     {
         std::cout << "First Name: " << this->_contacts[index - 1].get_f_name() << std::endl;
@@ -93,6 +104,7 @@ void    PhoneBook::search()
     }
     else
         std::cout << "Invalid index, must be between [1 - 8]" << std::endl;
+    
 }
 
 void    PhoneBook::exit(void)

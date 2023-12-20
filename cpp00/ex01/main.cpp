@@ -17,17 +17,21 @@ int main()
 
         std::cout << "Enter your desired option: ";
         std::cin >> option;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-        if(option == "ADD")
+        if (std::cin.eof())
+            ::exit (1);
+        if(option == "ADD" || option == "add")
         {
             new_phonebook.add();
         }
-        else if(option == "SEARCH")
+        else if(option == "SEARCH" || option == "search")
         {
             
             new_phonebook.search();
         }
-        else if(option == "EXIT")
+        else if(option == "EXIT" || option == "exit")
         {
             new_phonebook.exit();
             return 0;
@@ -35,7 +39,6 @@ int main()
         else
             std::cout << "Invalid option!" << std::endl;
         
-        std::cin.clear();
     }
     return 1;
 }
