@@ -4,6 +4,8 @@
 #include <iostream> // std::cout, std::endl
 #include <string> // .length(), .substr()
 #include <iomanip> // std::setw()
+#include <algorithm> // std::all_of()
+#include <limits> // std::numeric_limits
 
 class Contact
 {

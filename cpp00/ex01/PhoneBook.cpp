@@ -66,12 +66,14 @@ void    PhoneBook::add()
         if(std::cin.eof())
             ::exit (1);
     }
-    while (phone_num.empty())
+    while (phone_num.empty() || !std::all_of(phone_num.begin(), phone_num.end(), ::isdigit))
     {
         std::cout << "Enter phone number: ";
         std::getline(std::cin, phone_num);
         if(std::cin.eof())
             ::exit (1);
+        if(!std::all_of(phone_num.begin(), phone_num.end(), ::isdigit))
+            std::cout << "Invalid phone number, please enter digits only." << std::endl;
     }
     while (d_secret.empty())
     {
