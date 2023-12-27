@@ -1,0 +1,1 @@
+Archivo de prueba para comprobar como funcionan los objetos de C++ relacionados con los filestrems
