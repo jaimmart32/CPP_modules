@@ -12,7 +12,7 @@ void    Harl::complain(std::string level)
 {
     int code = -1;
     std::string options[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
-    void (Harl::*complain_ptr)(void) = nullptr;
+    void (Harl::*complain_ptr)(void) = NULL;
 
     for(int i = 0; i < 4; i++)
         if(level == options[i])
