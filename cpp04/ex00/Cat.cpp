@@ -1,12 +1,14 @@
 #include "Cat.hpp"
 
 Cat::Cat()
+: Animal()
 {
     std::cout<<"\033[2;30mDefault constructor called: Cat\033[0m"<<std::endl;
     this->type = "Cat";
 }
 
 Cat::Cat(const Cat& source)
+: Animal()
 {
     std::cout<<"\033[2;30mCopy constructor called: Cat\033[0m"<<std::endl;
     this->type = source.type;

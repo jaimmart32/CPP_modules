@@ -1,12 +1,14 @@
 #include "WrongCat.hpp"
 
 WrongCat::WrongCat()
+: WrongAnimal()
 {
     std::cout<<"\033[2;30mDefault constructor called: WrongCat\033[0m"<<std::endl;
     this->type = "WrongCat";
 }
 
 WrongCat::WrongCat(const WrongCat& source)
+: WrongAnimal()
 {
     std::cout<<"\033[2;30mCopy constructor called: WrongCat\033[0m"<<std::endl;
     this->type = source.type;

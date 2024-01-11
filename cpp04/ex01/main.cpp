@@ -1,31 +1,41 @@
 #include "Dog.hpp"
 #include "Cat.hpp"
-#include "WrongCat.hpp"
 
 int main()
 {
-const Animal* meta = new Animal();
-const Animal* j = new Dog();
-const Animal* i = new Cat();
-std::cout << j->getType() << " " << std::endl;
-std::cout << i->getType() << " " << std::endl;
-i->makeSound(); //will output the cat sound!
-j->makeSound();
-meta->makeSound();
+    std::cout<<"****************************************************"<<std::endl;
+    const Animal* j = new Dog();
+    const Animal* i = new Cat();
+    delete j;//should not create a leak
+    delete i;
 
-std::cout<<"***********************************************************"<<std::endl;
+    std::cout<<"****************************************************"<<std::endl;
 
-const WrongAnimal* reta = new WrongAnimal();
-const WrongAnimal* c = new WrongCat();
-std::cout << reta->getType() << " " << std::endl;
-std::cout << c->getType() << " " << std::endl;
-c->makeSound(); //will not output the cat sound beccause the method is not virtual!
-reta->makeSound();
 
-delete j;
-delete i;
-delete meta;
-delete c;
-delete reta;
-return 0;
+
+
+    Animal *vector[10];
+
+    for(int i=0; i < 10; i++)
+    {
+        if(i < 5)
+            vector[i] = new Dog();
+        else
+            vector[i] = new Cat();
+    }
+
+    for(int i=0; i < 10; i++)
+        delete vector[i];
+    
+    std::cout<<"****************************************************"<<std::endl;
+
+    Animal *extraCat = new Cat();
+    extraCat->makeSound();
+    Cat realCat;
+    Cat copyCat = Cat(realCat);
+    std::cout<<"copyCat is a "<<copyCat.getType()<<std::endl;
+    delete extraCat;
+
+    std::cout<<"****************************************************"<<std::endl;
+    return 0;
 }
