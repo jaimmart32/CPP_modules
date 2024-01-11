@@ -1,6 +1,7 @@
 #include "FragTrap.hpp"
 
 FragTrap::FragTrap()
+: ClapTrap()
 {
     std::cout << "\033[2;30mDefault Constructor called: FragTrap\033[0m" << std::endl;
     this->Name = "NoName";
@@ -10,6 +11,7 @@ FragTrap::FragTrap()
 }
 
 FragTrap::FragTrap(FragTrap &source)
+: ClapTrap()
 {
     std::cout << "\033[2;30mCopy Constructor called: FragTrap\033[0m" << std::endl;
     this->Name = source.Name;
@@ -36,6 +38,7 @@ FragTrap::~FragTrap()
 }
 
 FragTrap::FragTrap(std::string Name)
+: ClapTrap()
 {
     std::cout << "\033[2;30mNot Default Constructor called: FragTrap\033[0m" << std::endl;
     this->Name = Name;

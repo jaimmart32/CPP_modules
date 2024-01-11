@@ -1,6 +1,7 @@
 #include "ScavTrap.hpp"
 
 ScavTrap::ScavTrap()
+: ClapTrap()
 {
     std::cout << "\033[2;30mDefault Constructor called: ScavTrap\033[0m" << std::endl;
     this->Name = "NoName";
@@ -10,6 +11,7 @@ ScavTrap::ScavTrap()
 }
 
 ScavTrap::ScavTrap(ScavTrap &source)
+: ClapTrap()
 {
     std::cout << "\033[2;30mCopy Constructor called: ScavTrap\033[0m" << std::endl;
     this->Name = source.Name;
@@ -36,6 +38,7 @@ ScavTrap::~ScavTrap()
 }
 
 ScavTrap::ScavTrap(std::string Name)
+: ClapTrap()
 {
     std::cout << "\033[2;30mNot Default Constructor called: ScavTrap\033[0m" << std::endl;
     this->Name = Name;
