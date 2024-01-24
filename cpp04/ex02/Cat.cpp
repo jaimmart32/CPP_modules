@@ -13,14 +13,14 @@ Cat::Cat(const Cat &source)
 {
     std::cout<<"\033[2;30mCopy constructor called: Cat\033[0m"<<std::endl;
     this->type = source.type;
-    this->catBrain = new Brain(*source.catBrain);
+    this->catBrain = new Brain(*source.catBrain);// Deep copy
 }
 Cat  &Cat::operator=(const Cat &source)
 {
     if(this != &source)
     {
         this->type = source.type;
-        this->catBrain = new Brain(*source.catBrain);
+        this->catBrain = new Brain(*source.catBrain);// Deep copy
     }
     return *this;
 }

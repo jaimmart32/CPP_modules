@@ -13,14 +13,14 @@ Dog::Dog(const Dog& source)
 {
     std::cout<<"\033[2;30mCopy constructor called: Dog\033[0m"<<std::endl;
     this->type = source.type;
-    this->dogBrain = new Brain(*source.dogBrain);
+    this->dogBrain = new Brain(*source.dogBrain);// Deep Copy
 }
 Dog  &Dog::operator=(const Dog &source)
 {
     if(this != &source)
     {
         this->type = source.type;
-        this->dogBrain = new Brain(*source.dogBrain);
+        this->dogBrain = new Brain(*source.dogBrain);// Deep copy
     }
     return *this;
 }
