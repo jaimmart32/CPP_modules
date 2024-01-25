@@ -21,8 +21,16 @@ Character &Character::operator=(const Character &source)
         this->name = source.name;
         for(int i = 0; i < 4; i++)
         {
+            if(this->materia_slots[i])
+            {
+                delete this->materia_slots[i];
+                this->materia_slots[i] = NULL;
+            }
             if(source.materia_slots[i])
+            {
+                
                 this->materia_slots[i] = source.materia_slots[i]->clone();
+            }
             else
                 this->materia_slots[i] = NULL;
         }
