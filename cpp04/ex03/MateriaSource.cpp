@@ -43,6 +43,7 @@ void    MateriaSource::learnMateria(AMateria* toLearn)
             break ;
         }
     }
+    delete toLearn;
 }
 AMateria*   MateriaSource::createMateria(std::string const &target)
 {
