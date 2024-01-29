@@ -15,3 +15,7 @@
 - The same thing happens when there is a pointer of type base class and an object of type derived class is assigned to it and there is a virtual method, if the method is called through this pointer, thanks to virtual it will know that it has to call the method of the derived class and not that of the base class.
 
 This is the reason why the keyword "virtual" is o important when working with polymorfism and pointers of a base class type that point to derived classes objects.
+
+4. SUBTYPE POLYMORPHISM
+
+Subtype polymorphism allows you to use a pointer or reference of the base class to point to objects of derived classes and access their functions uniformly. This is achieved by using virtual functions and the virtual keyword.
