@@ -1,18 +1,18 @@
-#include "Form.hpp"
+#include "AForm.hpp"
 
-Form::Form()
+AForm::AForm()
 : name("Undefined"), is_signed(false),
   sign_grade(150),exec_grade(150)
 {
 }
 
-Form::Form(const Form &source)
+AForm::AForm(const AForm &source)
 : name(source.name),is_signed(source.is_signed),
   sign_grade(source.sign_grade),exec_grade(source.exec_grade)
 {
 }
 
-Form &Form::operator=(const Form &source)
+AForm &AForm::operator=(const AForm &source)
 {
     if(this != &source)
     {
@@ -21,11 +21,11 @@ Form &Form::operator=(const Form &source)
     return *this;
 }
 
-Form::~Form()
+AForm::~AForm()
 {
 }
 
-Form::Form(std::string name, int sign_grade, int exec_grade)
+AForm::AForm(std::string name, int sign_grade, int exec_grade)
 : name(name),is_signed(false),sign_grade(sign_grade),exec_grade(exec_grade)
 {
     try
@@ -41,7 +41,7 @@ Form::Form(std::string name, int sign_grade, int exec_grade)
     }
 }
 
-const char  *Form::beSigned(const Bureaucrat &bur)
+const char  *AForm::beSigned(const Bureaucrat &bur)
 {
     try
     {
@@ -67,37 +67,42 @@ const char  *Form::beSigned(const Bureaucrat &bur)
     }
 }
 
-std::string Form::getName() const
+std::string AForm::getName() const
 {
     return this->name;
 }
 
-bool Form::getIsSigned() const
+bool AForm::getIsSigned() const
 {
     return this->is_signed;
 }
 
-int Form::getSignGrade() const
+int AForm::getSignGrade() const
 {
     return this->sign_grade;
 }
 
-int Form::getExecGrade() const
+int AForm::getExecGrade() const
 {
     return this->exec_grade;
 }
 
-const char *Form::GradeTooHighException::what() const throw()
+const char *AForm::GradeTooHighException::what() const throw()
 {
     return "\033[0;31mError: its grade is too high\033[0m";
 }
 
-const char *Form::GradeTooLowException::what() const throw()
+const char *AForm::GradeTooLowException::what() const throw()
 {
     return "\033[0;31mError: its grade is too low\033[0m";
 }
 
-std::ostream &operator<<(std::ostream &output, const Form &form)
+const char *AForm::UnsignedException::what()const throw()
+{
+    return "\033[0;31mError: it has not been signed\033[0m";
+}
+
+std::ostream &operator<<(std::ostream &output, const AForm &form)
 {
     output<<"Form "<<form.getName()<<": "<<(form.getIsSigned() ? "is" : "isn't")
     <<" signed, requires grade "<<form.getSignGrade()<<" to sign and grade "
