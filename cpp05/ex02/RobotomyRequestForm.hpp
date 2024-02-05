@@ -21,7 +21,7 @@ public:
 
     std::string getTarget() const;
 
-    void execute(const Bureaucrat &bur) const;
+    const char *execute(const Bureaucrat &bur) const;
 };
 
 #endif

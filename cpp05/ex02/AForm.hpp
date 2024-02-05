@@ -23,7 +23,7 @@ public:
     AForm(std::string name,int sign_grade,int exec_grade);
 
     const char *beSigned(const Bureaucrat &bur);
-    virtual void execute(Bureaucrat const & executor) const = 0;
+    virtual const char *execute(Bureaucrat const & executor) const = 0;
 
     std::string getName() const;
     bool getIsSigned() const;

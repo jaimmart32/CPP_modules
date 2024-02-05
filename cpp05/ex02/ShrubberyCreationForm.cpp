@@ -31,7 +31,7 @@ std::string ShrubberyCreationForm::getTarget() const
     return this->target;
 }
 
-void ShrubberyCreationForm::execute(const Bureaucrat &bur) const
+const char *ShrubberyCreationForm::execute(const Bureaucrat &bur) const
 {
     try
     {
@@ -40,7 +40,8 @@ void ShrubberyCreationForm::execute(const Bureaucrat &bur) const
         else if(this->getExecGrade() < bur.getGrade())
             throw GradeTooLowException();
         std::string file_name = this->target + "_shrubbery";
-        std::ofstream wrightfile(file_name);
+        const char* file_name_cstr = file_name.c_str();//needed to match std::ofstream constructor
+        std::ofstream wrightfile(file_name_cstr);
         if(!wrightfile.is_open())
             throw UnopenedException();
         for (int i = 0; i < 7; i++)
@@ -63,12 +64,23 @@ void ShrubberyCreationForm::execute(const Bureaucrat &bur) const
 	    			   << std::endl;
 	    }
 	    wrightfile.close();
+        return NULL;
     }
-    catch(const std::exception& e)
+    catch(const UnsignedException& e)
     {
         std::cerr<<e.what()<<std::endl;
+        return "form is unsigned";
     }
-    
+    catch(const GradeTooLowException& e)
+    {
+        std::cerr<<e.what()<<std::endl;
+        return "bureaucrat's grade is to low to execute form";
+    }
+    catch(const UnopenedException& e)
+    {
+        std::cerr<<e.what()<<std::endl;
+        return "file couldn't be opened";
+    }
 }
 
 const char *ShrubberyCreationForm::UnopenedException::what() const throw()

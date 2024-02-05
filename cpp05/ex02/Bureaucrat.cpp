@@ -110,12 +110,22 @@ std::ostream    &operator<<(std::ostream &out_stream, const Bureaucrat &bur)
     return out_stream;
 }
 
-void Bureaucrat::signForm(Form &form)
+void Bureaucrat::signForm(AForm &form)
 {
     const char *reason = form.beSigned(*this);
     if(!reason)
         std::cout<<this->getName()<<" signed "<<form.getName()<<std::endl;
     else
         std::cout<<this->getName()<<" couldn't sign "<<form.getName()
+        <<" because "<<reason<<std::endl;
+}
+
+void    Bureaucrat::executeForm(AForm const & form)
+{
+    const char *reason = form.execute(*this);
+    if(!reason)
+        std::cout<<this->getName()<<" executed "<<form.getName()<<std::endl;
+    else
+        std::cout<<this->getName()<<" couldn't execute "<<form.getName()
         <<" because "<<reason<<std::endl;
 }

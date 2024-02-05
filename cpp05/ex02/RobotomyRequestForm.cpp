@@ -31,7 +31,7 @@ std::string RobotomyRequestForm::getTarget() const
     return this->target;
 }
 
-void RobotomyRequestForm::execute(const Bureaucrat &bur) const
+const char *RobotomyRequestForm::execute(const Bureaucrat &bur) const
 {
     try
     {
@@ -47,11 +47,16 @@ void RobotomyRequestForm::execute(const Bureaucrat &bur) const
         }
         else
             std::cout<<this->getTarget()<<"'s robotomy failed :("<<std::endl;
-
+        return NULL;
     }
-    catch(const std::exception& e)
+    catch(const UnsignedException& e)
     {
-        std::cerr << e.what() <<std::endl;
+        std::cerr<<e.what()<<std::endl;
+        return "form is unsigned";
     }
-    
+    catch(const GradeTooLowException& e)
+    {
+        std::cerr<<e.what()<<std::endl;
+        return "bureaucrat's grade is to low to execute form";
+    }
 }
