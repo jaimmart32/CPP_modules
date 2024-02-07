@@ -31,6 +31,8 @@ void manage_int(std::string arg);
 void manage_float(std::string arg);
 void manage_double(std::string arg);
 
+bool    has_decimal_f(float f);
+bool    has_decimal_d(double d);
 bool    convert_to_int(std::string arg);
 bool    convert_to_float(std::string arg);
 bool    convert_to_double(std::string arg);

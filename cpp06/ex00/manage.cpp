@@ -77,9 +77,14 @@ void    manage_float(std::string arg)
         std::cout<<"int: "<<i<<std::endl;
     else
         std::cout<<"int: impossible"<<std::endl;
-
-    std::cout<<"float: "<<f<<"f"<<std::endl;//check for conversion????
-    std::cout<<"double: "<<d<<std::endl;//check for conversion????
+    if(has_decimal_f(f))
+        std::cout<<"float: "<<f<<"f"<<std::endl;
+    else
+        std::cout<<"float: "<<f<<".0f"<<std::endl;
+    if(has_decimal_d(d))
+        std::cout<<"double: "<<d<<std::endl;//check for conversion????
+    else
+        std::cout<<"double: "<<d<<".0"<<std::endl;
 }
 
 void    manage_double(std::string arg)
@@ -101,6 +106,12 @@ void    manage_double(std::string arg)
     else
         std::cout<<"int: impossible"<<std::endl;
 
-    std::cout<<"float: "<<f<<"f"<<std::endl;//check for conversion????
-    std::cout<<"double: "<<d<<std::endl;//check for conversion????
+    if(has_decimal_f(f))
+        std::cout<<"float: "<<f<<"f"<<std::endl;
+    else
+        std::cout<<"float: "<<f<<".0f"<<std::endl;
+    if(has_decimal_d(d))
+        std::cout<<"double: "<<d<<std::endl;//check for conversion????
+    else
+        std::cout<<"double: "<<d<<".0"<<std::endl;
 }

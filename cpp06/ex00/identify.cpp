@@ -24,12 +24,14 @@ static bool is_num(std::string arg)
     else
         return false;
     if(i < len && arg.at(i) == '.')
-        i++;
-    if(i < len && std::isdigit(arg.at(i)))
-        while(i < len && std::isdigit(arg.at(i)))
+    {
             i++;
-    else
-        return false;
+        if(i < len && std::isdigit(arg.at(i)))
+            while(i < len && std::isdigit(arg.at(i)))
+                i++;
+        else
+            return false;
+    }
     if(i < len && arg.at(i) == 'f')
         i++;
     return i == len;
