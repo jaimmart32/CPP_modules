@@ -1,9 +1,9 @@
-NAME = Serializer
+NAME = Dynamic_casting
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 #-g3 -fsanitize=address
 
-SRC = main.cpp Serializer.cpp Data.cpp
+SRC = main.cpp Base.cpp A.cpp B.cpp C.cpp functions.cpp
 OBJ = $(SRC:.cpp=.o)
 
 $(NAME):	$(OBJ)
