@@ -2,6 +2,8 @@
 
 int main()
 {
+    std::cout<<"************Mutant************************"<<std::endl;
+
     MutantStack<int> mstack;
 	mstack.push(5);
 	mstack.push(17);
@@ -24,12 +26,13 @@ int main()
 	}
 	std::stack<int> s(mstack);
 
-    std::cout<<"************************************"<<std::endl;
+    std::cout<<"************list************************"<<std::endl;
 
     std::list<int> my_list;
 	my_list.push_back(5);
 	my_list.push_back(17);
 	std::cout << my_list.back() << std::endl;
+	my_list.pop_back();
 	std::cout << my_list.size() << std::endl;
 	my_list.push_back(3);
 	my_list.push_back(5);
@@ -46,4 +49,16 @@ int main()
 		++it2;
 	}
 	std::list<int> l(my_list);
+
+    std::cout<<"***********other_iterators*************************"<<std::endl;
+
+	MutantStack<int>::rev_iterator rit = mstack.rbegin();
+	MutantStack<int>::rev_iterator rite = mstack.rend();
+	++rit;
+	--rit;
+	while(rit != rite)
+	{
+		std::cout<<*rit<<std::endl;
+		++rit;
+	}
 }
