@@ -21,21 +21,39 @@ std::string cleanSpace(std::string str)
     return cleanStr;
 }
 
-//Adaptar y checkear!!
-std::string fechaMasCercana(const std::map<std::string, double>& bitcoinData, const std::string& fecha) {
-    double minDiff = std::numeric_limits<double>::infinity();
-    std::string fechaMasCercana;
-
-    for (const auto& pair : bitcoinData) {
-        double diff = std::difftime(std::stol(fecha), std::stol(pair.first));
-        if (diff <= 0 && std::abs(diff) < minDiff) {
-            minDiff = std::abs(diff);
-            fechaMasCercana = pair.first;
-        }
+bool    validDate(std::string date)
+{
+    if(date.length() != 10)
+        return false;
+    int i = -1;
+    while(date[++i])
+    {
+        if(i != 4 && i != 7 && !std::isdigit(date[i]))
+            return false;
     }
-
-    return fechaMasCercana;
+    return true;
 }
+
+bool validAmount(double amount)
+{
+    if(amount < 0 || amount > 1000)
+        return false;
+    return true;
+}
+
+std::string closestDate(std::map<std::string, double>& btcData, const std::string& date)
+{
+    std::string closestDate;
+
+    for (std::map<std::string, double>::iterator it = btcData.begin();it != btcData.end();it++)
+    {
+        if(date >= it->first)
+         closestDate = it->first;
+    }
+    return closestDate;
+}
+
+
 
 int BitcoinExchange::show(std::string inputFileName)
 {
@@ -91,18 +109,39 @@ int BitcoinExchange::show(std::string inputFileName)
         if(std::getline(iss, dateBuff,  '|') && std::getline(iss >> std::ws, amountBuff))
         {
             dateBuff = cleanSpace(dateBuff);
+            double btcAmount = 0.0;
             std::cout<<dateBuff<<"**"<<amountBuff<<std::endl;
-            if(dateBuff.empty() || amountBuff.empty())
-                std::cerr<<"Error: non valid line"<<std::endl;
-            double btcAmount = std::stod(amountBuff);
+            if(!validDate(dateBuff))
+            {
+                std::cerr<<"Error: invalid date format"<<std::endl;
+                continue;
+            }
+            try
+            {
+                btcAmount = std::stod(amountBuff);
+            }
+            catch(std::exception &e)
+            {
+                std::cerr<<"Error: invalid btc amount"<<std::endl;
+                continue;
+            }
+            if(!validAmount(btcAmount))
+            {
+                std::cerr<<"Error: invalid btc amount"<<std::endl;
+                continue;
+            }
+            dateBuff = closestDate(btcData, dateBuff);
             std::map<std::string, double>::iterator it = btcData.find(dateBuff);
             if(it == btcData.end())
-                std::cerr<<"Temporary Error: date not found"<<std::endl;
+            {
+                std::cerr<<"Error: date is before bitcoin"<<std::endl;
+                continue;
+            }
             double totalValue = it->second * btcAmount;
             std::cout<<dateBuff<<" => "<<std::fixed<<std::setprecision(2)<<btcAmount<<" = "<<totalValue<<std::endl;
         }
         else
-            std::cerr<<"Error: getting date and amount of btc"<<std::endl;
+            std::cerr<<"Error: invalid format for this line"<<std::endl;
     }
     inputFile.close();
 
