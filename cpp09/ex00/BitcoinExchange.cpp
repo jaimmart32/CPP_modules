@@ -53,22 +53,20 @@ std::string closestDate(std::map<std::string, double>& btcData, const std::strin
     return closestDate;
 }
 
-
-
-int BitcoinExchange::show(std::string inputFileName)
+std::map<std::string, double> createMap()
 {
+    std::map<std::string, double> btcData;
+
     //Open database file
     std::ifstream dataFile("data.csv");
     if(!dataFile)
     {
         std::cerr<<"\033[0;31mError: couldn't open data.csv\033[0m"<<std::endl;
-        return 1;
+        return btcData;
     }
 
     //Parse data.csv
-    std::map<std::string, double> btcData;
     std::string dbLine;
-
     while(std::getline(dataFile, dbLine))
     {
         std::istringstream iss(dbLine);
@@ -77,15 +75,16 @@ int BitcoinExchange::show(std::string inputFileName)
 
         if(std::getline(iss, date, ',') && iss >> value)
             btcData[date] = value;
-        //else
-        //    std::cerr<<"\033[0;31mError: invalid line in data.csv\033[0m"<<std::endl;
     }
     dataFile.close();
-
     //Print std::map to verify
     //for(std::map<std::string, double>::iterator it = btcData.begin(); it != btcData.end(); it++)
     //    std::cout<< "Date: "<<it->first <<", BTC Value: "<<std::fixed<<std::setprecision(2)<<it->second<<std::endl;
+    return btcData;
+}
 
+int parseInputFile(std::string inputFileName, std::map<std::string, double> btcData)
+{
     //Open inputfile
     std::ifstream inputFile(inputFileName);
     if(!inputFile)
@@ -94,7 +93,7 @@ int BitcoinExchange::show(std::string inputFileName)
         return 1;
     }
 
-    //Process each line from inputfile
+    //Parse inputfile
     std::string line;
     while(std::getline(inputFile, line))
     {
@@ -102,15 +101,12 @@ int BitcoinExchange::show(std::string inputFileName)
         std::string dateBuff;
         std::string amountBuff;
 
-        //Clean whitespaces
-        //iss >> std::ws;
-
         //Extract date and amount, print result
         if(std::getline(iss, dateBuff,  '|') && std::getline(iss >> std::ws, amountBuff))
         {
             dateBuff = cleanSpace(dateBuff);
             double btcAmount = 0.0;
-            std::cout<<dateBuff<<"**"<<amountBuff<<std::endl;
+            std::cout<<dateBuff<<"**"<<amountBuff<<std::endl;//Provisional
             if(!validDate(dateBuff))
             {
                 std::cerr<<"Error: invalid date format"<<std::endl;
@@ -134,7 +130,7 @@ int BitcoinExchange::show(std::string inputFileName)
             std::map<std::string, double>::iterator it = btcData.find(dateBuff);
             if(it == btcData.end())
             {
-                std::cerr<<"Error: date is before bitcoin"<<std::endl;
+                std::cerr<<"Error: date previous to bitcoin creation"<<std::endl;
                 continue;
             }
             double totalValue = it->second * btcAmount;
@@ -144,6 +140,15 @@ int BitcoinExchange::show(std::string inputFileName)
             std::cerr<<"Error: invalid format for this line"<<std::endl;
     }
     inputFile.close();
+    return 0;
+}
 
+int BitcoinExchange::show(std::string inputFileName)
+{
+    std::map<std::string, double> btcData = createMap();
+    if(btcData.empty())
+        return 1;
+    if(parseInputFile(inputFileName, btcData))
+        return 1;
     return 0;
 }
