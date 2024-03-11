@@ -13,7 +13,7 @@ $(NAME):	$(OBJ)
 all: $(NAME)
 
 clean:
-			@rm -rf $(OBJ) *_shrubbery
+			@rm -rf $(OBJ)
 			@echo "object files removed."
 
 fclean: clean

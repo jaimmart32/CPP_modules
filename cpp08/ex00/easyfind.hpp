@@ -7,7 +7,8 @@
 
 //typename in the return value of the function is necessary to indicate to
 //the compiler that 'T::iterator' is a typename and not an attribute or method
-//of a class called T for example.
+//of a class called T for example. By specifying this it resolves de ambiguity
+//of the function's prototype.
 
 template <typename T>
 typename T::iterator easyfind(T &container, int value)
