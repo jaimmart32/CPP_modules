@@ -12,10 +12,11 @@ int main(int argc, char **argv)
 
     fill_containers(argc, argv, vNumbers, lNumbers);
 
-    //start = function for time;
+    std::clock_t start_time = std::clock();
     //merge_insertion_sort(vNumbers);
-    //end = funtion for time;
-    //vector_duration = end - start;
+    mergeInsertionSort(vNumbers, 5);
+    std::clock_t end_time = std::clock();
+    double vector_duration = ((end_time - start_time) / (double)CLOCKS_PER_SEC) *  1000;
 
     //start = function for time;
     //merge_insertion_sort(lNumbers);
@@ -23,7 +24,7 @@ int main(int argc, char **argv)
     //list_duration = end - start;
 
     //display_info(vNumbers, lNumbers, vector_duration, list_duration);
-    display_info(vNumbers, lNumbers);
+    display_info(vNumbers, lNumbers, vector_duration);
 
     return 0;
 }
