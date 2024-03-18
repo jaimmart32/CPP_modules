@@ -106,10 +106,9 @@ int parseInputFile(std::string inputFileName, std::map<std::string, double> btcD
         {
             dateBuff = cleanSpace(dateBuff);
             double btcAmount = 0.0;
-            std::cout<<dateBuff<<"**"<<amountBuff<<std::endl;//Provisional
             if(!validDate(dateBuff))
             {
-                std::cerr<<"Error: invalid date format"<<std::endl;
+                std::cerr<<"\033[0;31mError: invalid date format\033[0m"<<std::endl;
                 continue;
             }
             try
@@ -118,26 +117,26 @@ int parseInputFile(std::string inputFileName, std::map<std::string, double> btcD
             }
             catch(std::exception &e)
             {
-                std::cerr<<"Error: invalid btc amount"<<std::endl;
+                std::cerr<<"\033[0;31mError: invalid btc amount\033[0m"<<std::endl;
                 continue;
             }
             if(!validAmount(btcAmount))
             {
-                std::cerr<<"Error: invalid btc amount"<<std::endl;
+                std::cerr<<"\033[0;31mError: invalid btc amount\033[0m"<<std::endl;
                 continue;
             }
             dateBuff = closestDate(btcData, dateBuff);
             std::map<std::string, double>::iterator it = btcData.find(dateBuff);
             if(it == btcData.end())
             {
-                std::cerr<<"Error: date previous to bitcoin creation"<<std::endl;
+                std::cerr<<"\033[0;31mError: date previous to bitcoin creation\033[0m"<<std::endl;
                 continue;
             }
             double totalValue = it->second * btcAmount;
             std::cout<<dateBuff<<" => "<<std::fixed<<std::setprecision(2)<<btcAmount<<" = "<<totalValue<<std::endl;
         }
         else
-            std::cerr<<"Error: invalid format for this line"<<std::endl;
+            std::cerr<<"\033[0;31mError: invalid format for this line\033[0m"<<std::endl;
     }
     inputFile.close();
     return 0;
